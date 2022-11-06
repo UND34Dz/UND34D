@@ -167,38 +167,27 @@ namespace big
 		ytd_file.load_ytd(path.c_str(), "tupoye.ytd");
 		float size_txt = 0.15f;
 		auto size_spinner = get_texture_scale(size_txt);
-		const auto timer_duration = 5 * 1000ms;
-		const auto start = std::chrono::steady_clock::now();
-
-		std::chrono::duration<double> time_left = timer_duration - (std::chrono::steady_clock::now() - start);
-		const auto hrs = std::chrono::duration_cast<std::chrono::hours>(time_left);
-		const auto mins = std::chrono::duration_cast<std::chrono::minutes>(time_left - hrs);
-		const auto secs = std::chrono::duration_cast<std::chrono::seconds>(time_left - hrs - mins);
-		time_left = timer_duration - (std::chrono::steady_clock::now() - start);
 		while (true)
 		{
 
 			g_gui.script_on_tick();
 			//if (g_gui.m_start_topoye)
 			 //amount of seconds
-			Sleep(1000);
-			while (time_left > 0s)
-			{
-				g_native_gui.draw_texture(
-					"tupoye",
-					"tupoye_m",
-					0.065f,
-					0.65f, // good
-					size_spinner.x,
-					size_spinner.y,
-					0.0f,
-					255, 255, 255, 255);
-			}
+			g_native_gui.draw_texture(
+				"tupoye",
+				"tupoye_m",
+				0.065f,
+				0.65f, // good
+				size_spinner.x,
+				size_spinner.y,
+				0.0f,
+				255, 255, 255, 255);
+				script::get_current()->yield();
+		}
 			
 			//g_gui.m_start_topoye = false;
-			script::get_current()->yield();
-		}
 
-		Sleep(1000);
+
+		//Sleep(1000);
 	}
 }

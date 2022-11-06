@@ -46,6 +46,8 @@ namespace big
 			looped::self_super_run();
 			looped::ragdoll_mp();
 			looped::self_no_collision();
+			looped::self_unlimited_oxygen();
+			looped::self_no_water_collision();
 
 			script::get_current()->yield();
 		}
@@ -94,6 +96,7 @@ namespace big
 			looped::vehicle_speedo_meter();
 			looped::vehicle_keep_vehicle_repaired();
 			looped::vehicle_remove_speed_limit();
+			looped::vehicle_no_water_collision();
 
 			looped::vehicle_chaff();
 			looped::vehicle_flares();

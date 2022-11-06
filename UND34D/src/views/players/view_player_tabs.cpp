@@ -19,16 +19,6 @@ namespace big
 					view::view_player_info();
 					ImGui::EndTabItem();
 				}
-				if (ImGui::BeginTabItem("Ped"))
-				{
-					view::view_player_ped();
-					ImGui::EndTabItem();
-				}
-				if (ImGui::BeginTabItem("Teleport"))
-				{
-					view::view_player_teleport();
-					ImGui::EndTabItem();
-				}
 				if (ImGui::BeginTabItem("Toxic"))
 				{
 					view::view_player_toxic();

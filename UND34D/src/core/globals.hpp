@@ -159,6 +159,8 @@ namespace big
 			bool super_run = false;
 			bool allow_ragdoll = false;
 			bool no_collision = false;
+			bool unlimited_oxygen = false;
+			bool no_water_collision = false;
 			int wanted_level = 0;
 			bool god_mode = false;
 			bool proof_bullet = false;
@@ -320,6 +322,7 @@ namespace big
 			bool turn_signals = false;
 			bool vehicle_jump = false;
 			bool keep_vehicle_repaired = false;
+			bool no_water_collision = false;
 			bool remove_speed_limit = false;
 			bool flares = false;
 			bool chaff = false;
@@ -634,6 +637,8 @@ namespace big
 			this->self.off_radar = j["self"]["off_radar"];
 			this->self.super_run = j["self"]["super_run"];
 			this->self.no_collision = j["self"]["no_collision"];
+			this->self.unlimited_oxygen = j["self"]["unlimited_oxygen"];
+			this->self.no_water_collision = j["self"]["no_water_collision"];
 			this->self.allow_ragdoll = j["self"]["allow_ragdoll"];
 
 			this->settings.dev_dlc = j["settings"]["dev_dlc"];
@@ -694,6 +699,7 @@ namespace big
 			this->vehicle.is_targetable = j["vehicle"]["is_targetable"];
 			this->vehicle.seatbelt = j["vehicle"]["seatbelt"];
 			this->vehicle.turn_signals = j["vehicle"]["turn_signals"];
+			this->vehicle.no_water_collision = j["vehicle"]["no_water_collision"];
 			this->vehicle.flares = j["vehicle"]["flares"];
 			this->vehicle.chaff = j["vehicle"]["chaff"];
 
@@ -926,6 +932,8 @@ namespace big
 						{ "off_radar", this->self.off_radar },
 						{ "super_run", this->self.super_run },
 						{ "no_collision", this->self.no_collision },
+						{ "unlimited_oxygen", this->self.unlimited_oxygen },
+						{ "no_water_collision", this->self.no_water_collision },
 						{ "allow_ragdoll", this->self.allow_ragdoll }
 					}
 				},
@@ -1013,6 +1021,7 @@ namespace big
 						{ "flares", this->vehicle.flares },
 						{ "chaff", this->vehicle.chaff },
 						{ "seatbelt", this->vehicle.seatbelt },
+						{ "no_water_collision", this->vehicle.no_water_collision },
 						{
 							"speedo_meter",
 							{
