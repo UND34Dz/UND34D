@@ -2,7 +2,7 @@
 
 **TODO**
 -------------
-- [ ] Restructure tabs into more user friendly
+- [ ] Restructure tabs into more user friendly (NOT NEED IF WE DO CHECKBOX BELOW)
 
 - [ ] Restructure Gui into something else for example what cherax looks like
 
