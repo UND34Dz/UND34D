@@ -1,6 +1,6 @@
-workspace "BigBaseV2"
+workspace "UND34D"
 	architecture "x64"
-	startproject "BigBaseV2"
+	startproject "UND34D"
 
 	configurations
 	{
@@ -11,7 +11,7 @@ workspace "BigBaseV2"
 	outputdir = "%{cfg.buildcfg}"
 
 	CppVersion = "C++20"
-	MsvcToolset = "v142"
+	MsvcToolset = "v143"
 	WindowsSdkVersion = "10.0"
   
 	function DeclareMSVCOptions()
@@ -181,8 +181,8 @@ workspace "BigBaseV2"
 		DeclareMSVCOptions()
 		DeclareDebugOptions()
 
-	project "BigBaseV2"
-		location "BigBaseV2"
+	project "UND34D"
+		location "UND34D"
 		kind "SharedLib"
 		language "C++"
 

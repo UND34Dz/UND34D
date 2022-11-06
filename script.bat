@@ -11,5 +11,5 @@ IF %ERRORLEVEL% NEQ 0 (
 )
 
 echo "Opening project..."
-tasklist /FI "WINDOWTITLE eq BigBaseV2 - Microsoft Visual Studio" /FI "STATUS eq running" 2>NUL | find /I /N "devenv.exe" >NUL
-IF %ERRORLEVEL% NEQ 0 (start BigBaseV2.sln) ELSE (echo Visual Studio is already open, doing nothing. && PAUSE)
+tasklist /FI "WINDOWTITLE eq UND34D - Microsoft Visual Studio" /FI "STATUS eq running" 2>NUL | find /I /N "devenv.exe" >NUL
+IF %ERRORLEVEL% NEQ 0 (start UND34D.sln) ELSE (echo Visual Studio is already open, doing nothing. && PAUSE)
