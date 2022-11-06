@@ -25,13 +25,13 @@ jobs:
 
       - name: Build 64bit release DLL
         run: |
-          msbuild /p:Configuration=Release /p:Platform=x64 BigBaseV2.sln -m /warnaserror
+          msbuild /p:Configuration=Release /p:Platform=x64 UND34D.sln -m /warnaserror
 
       - name: Check if DLL got built
-        run: if (-Not (Test-Path -path "bin/Release/BigBaseV2.dll")) {throw 1}
+        run: if (-Not (Test-Path -path "bin/Release/UND34D.dll")) {throw 1}
 
-      - name: Rename DLL to YimMenu-dev-{GITHUB_SHA}.dll
-        run: ren BigBaseV2.dll YimMenu-dev-${{github.sha}}.dll
+      - name: Rename DLL to UND34D-dev-{GITHUB_SHA}.dll
+        run: ren UND34D.dll UND34D-dev-${{github.sha}}.dll
         working-directory: bin/Release/
 
       - name: Upload Artifact
@@ -39,4 +39,4 @@ jobs:
         with:
           name: binary
           path: |
-            bin/Release/YimMenu-dev-*.dll
+            bin/Release/UND34D-dev-*.dll
