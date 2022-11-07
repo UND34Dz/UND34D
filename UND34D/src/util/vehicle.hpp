@@ -658,4 +658,48 @@ namespace big::vehicle
 			}
 		}
 	}
+
+	inline void max_perf(Vehicle veh)
+	{
+		Hash model = ENTITY::GET_ENTITY_MODEL(veh);
+		VEHICLE::SET_VEHICLE_MOD_KIT(veh, 0);
+		VEHICLE::TOGGLE_VEHICLE_MOD(veh, MOD_TURBO, TRUE);
+		VEHICLE::SET_VEHICLE_TYRES_CAN_BURST(veh, false);
+
+		int num[7] = { 11, 12, 13, 15, 16, 17, 18 };
+		for (int i = 0; i < 7; i++)
+		{
+			VEHICLE::SET_VEHICLE_MOD(veh, num[i], VEHICLE::GET_NUM_VEHICLE_MODS(veh, num[i]) - 1, true);
+		}
+	}
+
+	inline void down_perf(Vehicle veh)
+	{
+		Hash model = ENTITY::GET_ENTITY_MODEL(veh);
+		VEHICLE::SET_VEHICLE_MOD_KIT(veh, 0);
+		VEHICLE::TOGGLE_VEHICLE_MOD(veh, MOD_TURBO, FALSE);
+		VEHICLE::TOGGLE_VEHICLE_MOD(veh, MOD_TYRE_SMOKE, FALSE);
+		VEHICLE::TOGGLE_VEHICLE_MOD(veh, MOD_XENON_LIGHTS, FALSE);
+		VEHICLE::SET_VEHICLE_WINDOW_TINT(veh, 0);
+		VEHICLE::SET_VEHICLE_TYRES_CAN_BURST(veh, true);
+
+		for (int i = 0; i < 50; i++)
+		{
+			VEHICLE::REMOVE_VEHICLE_MOD(veh, i);
+		}
+	}
+
+
+	inline void cargobobmagnet()
+	{
+		Vector3 pos = ENTITY::GET_ENTITY_COORDS(self::ped, true);
+		float heading = ENTITY::GET_ENTITY_HEADING(PED::IS_PED_IN_ANY_VEHICLE(self::ped, false) ? PED::GET_VEHICLE_PED_IS_IN(self::ped, false) : self::ped);
+		Hash vehicle = VEHICLE_CARGOBOB3;
+		Vehicle veh = vehicle::spawn(vehicle, pos, heading, true);
+		VEHICLE::CREATE_PICK_UP_ROPE_FOR_CARGOBOB(veh, 1);
+		teleport_into_vehicle(veh);
+
+	}
+
+	static constexpr char const* chase_id[] = { "Off", "Car", "Heli", "Plane" };
 }

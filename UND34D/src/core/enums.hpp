@@ -17,7 +17,9 @@ namespace big
 		GRAVITY_GUN,
 		STEAL_VEHICLE_GUN,
 		REPAIR_GUN,
-		VEHICLE_GUN
+		VEHICLE_GUN,
+		CARTOON_GUN,
+		PEWPEW_GUN
 	};
 
 	enum class ContextEntityType : uint8_t
@@ -162,10 +164,14 @@ namespace big
 		ChangeMCRole = 656530441, // _PLAYSTATS_CHANGE_MC_ROLE
 		DisableRecording = 867047895, // GET_FINAL_RENDERED_CAM_COORD
 		MCTeleport = -555356783, // NETWORK::NETWORK_HASH_FROM_PLAYER_HANDLE(PLAYER::PLAYER_ID()) == (first one)
+		KickToSP = 2071375245, 
 		StartActivity = 1368055548, // (Var0.f_2, -1); first match
 
 		Crash = 526822748, // SET_NO_LOADING_SCREEN, xref it
 		Crash2 = 1348481963,
+		Destroyvehicle = -2126830022,
+		DisownVehicle = -306558546,
+		BlockPassive = 65268844,
 
 		TSECommand = -1388926377, // CnCTG_IN_BF
 		TSECommandRotateCam = -1762807505, // != 29) && f

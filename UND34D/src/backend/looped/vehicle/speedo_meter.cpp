@@ -42,13 +42,15 @@ namespace big
 		}
 
 		sprintf(speed, "%*d", g->vehicle.speedo_meter.left_side ? 0 : char_width, (int)veh_speed);
-
-		HUD::SET_TEXT_FONT(2);
-		HUD::SET_TEXT_SCALE(.9f, .9f);
-		HUD::SET_TEXT_OUTLINE();
-		HUD::BEGIN_TEXT_COMMAND_DISPLAY_TEXT("STRING");
-		HUD::ADD_TEXT_COMPONENT_SUBSTRING_PLAYER_NAME(speed_type);
-		HUD::END_TEXT_COMMAND_DISPLAY_TEXT(g->vehicle.speedo_meter.x, g->vehicle.speedo_meter.y, 1);
+		if (g->vehicle.speedo_meter.type_text)
+		{
+			HUD::SET_TEXT_FONT(2);
+			HUD::SET_TEXT_SCALE(.9f, .9f);
+			HUD::SET_TEXT_OUTLINE();
+			HUD::BEGIN_TEXT_COMMAND_DISPLAY_TEXT("STRING");
+			HUD::ADD_TEXT_COMPONENT_SUBSTRING_PLAYER_NAME(speed_type);
+			HUD::END_TEXT_COMMAND_DISPLAY_TEXT(g->vehicle.speedo_meter.x, g->vehicle.speedo_meter.y, 1);
+		}
 
 		HUD::SET_TEXT_FONT(2);
 		HUD::SET_TEXT_SCALE(.9f, .9f);
@@ -56,6 +58,5 @@ namespace big
 		HUD::BEGIN_TEXT_COMMAND_DISPLAY_TEXT("STRING");
 		HUD::ADD_TEXT_COMPONENT_SUBSTRING_PLAYER_NAME(speed);
 		HUD::END_TEXT_COMMAND_DISPLAY_TEXT(g->vehicle.speedo_meter.x + (g->vehicle.speedo_meter.left_side ? 0 : .003f), g->vehicle.speedo_meter.y + .04f, 1);
-
 	}
 }

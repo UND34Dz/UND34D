@@ -3,6 +3,7 @@
 #include "util/entity.hpp"
 #include "util/ped.hpp"
 #include "util/teleport.hpp"
+#include "util/toxic.hpp"
 
 namespace big
 {
@@ -76,11 +77,35 @@ namespace big
 
 		s_context_menu ped_menu{
 			ContextEntityType::PED,
-			0,{}, {}};
+			0,{}, {
+			{"DELETE", [this] {
+					if (entity::take_control_of(m_handle))
+					{
+						entity::delete_entity(m_handle);
+					}
+				}},
+			{"STEAL IDENTITY", [this]
+				{
+					ped::steal_identity(m_handle);
+				}},
+			{"STEAL OUTFIT", [this]
+				{
+					ped::steal_outfit(m_handle);
+				}},
+			} };
+
 
 		s_context_menu object_menu{
 			ContextEntityType::OBJECT,
-			0,{}, {}};
+			0,{}, {
+			{"DELETE", [this] {
+					if (entity::take_control_of(m_handle))
+					{
+						entity::delete_entity(m_handle);
+					}
+				}}
+			} };
+
 
 		s_context_menu player_menu{
 			ContextEntityType::PLAYER,
@@ -88,7 +113,7 @@ namespace big
 				{"STEAL IDENTITY", [this]
 				{
 					ped::steal_identity(m_handle);
-				}}
+				}},
 			} };
 
 		s_context_menu shared_menu{
@@ -103,6 +128,10 @@ namespace big
 					rage::fvector3 pos = m_pointer->m_navigation->m_position;
 					teleport::to_coords({ pos.x, pos.y, pos.z });
 					}},
+				{"CAGE", [this] {
+					rage::fvector3 pos = m_pointer->m_navigation->m_position;
+					entity::cage_ped(m_handle);
+				}},
 			}
 		};
 

@@ -4,8 +4,7 @@
 #include "pointers.hpp"
 #include "gta/joaat.hpp"
 #include "util/vehicle.hpp"
-#include "pointers.hpp"
-#include "script.hpp"
+#include "util/entity.hpp"
 
 namespace big::ped
 {

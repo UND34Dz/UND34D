@@ -10,3 +10,4 @@
 #include "teleport.hpp"
 #include "vehicle.hpp"
 #include "water.hpp"
+#include "toxic.hpp"

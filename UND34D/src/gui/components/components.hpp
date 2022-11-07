@@ -13,6 +13,7 @@ namespace big
 	public:
 		static bool nav_button(const std::string_view);
 		static bool button(const std::string_view);
+		static void button(const std::string_view, std::string_view, std::function<void()>);
 		static bool menu_item(const std::string_view);
 		static void icon(const std::string_view);
 		static void help_marker(const std::string_view);

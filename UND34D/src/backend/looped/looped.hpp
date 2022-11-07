@@ -8,10 +8,13 @@ namespace big
 {
 	class looped {
 	public:
-		static void context_menu();
 		static void hud_transition_state();
 
 		static void tunables_disable_phone();
+		static void tunables_clean_player();
+		static void tunables_ignoreplayer();
+		static void tunables_mobileradio();
+		static void tunables_disablehud();
 		static void phone_anim();
 		static void tunables_no_idle_kick();
 		static void always_control();
@@ -19,10 +22,11 @@ namespace big
 
 		static void player_never_wanted(const player_ptr &player);
 		static void player_spectate();
+		static void player_freezeplayer();
+		static void player_freezeallplayers();
+		static void player_shakecam();
+		static void player_chase();
 
-		static void protections_replay_interface();
-
-		static void self_clean_player();
 		static void self_free_cam_disable_control_action();
 		static void self_free_cam();
 		static void self_godmode();
@@ -33,6 +37,10 @@ namespace big
 		static void self_off_radar();
 		static void self_police();
 		static void self_super_run();
+		static void self_flash_run();
+		static void self_aimbot();
+		static void self_SuperMan();
+		static void self_force_field();
 		static void ragdoll_mp();
 		static void self_no_collision();
 		static void self_unlimited_oxygen();
@@ -40,6 +48,9 @@ namespace big
 
 		static void script_starter();
 		static void session_local_time();
+		static void session_slowmotion();
+		static void session_jumpingcars();
+		static void session_rainbowtraffic();
 		static void fast_join();
 		
 		static void world_population_control();
@@ -70,10 +81,13 @@ namespace big
 		static void vehicle_flares();
 		static void vehicle_chaff();
 		static void vehicle_keep_vehicle_repaired();
+		static void vehicle_headlightmul();
+		static void vehicle_uniweap();
 		static void vehicle_no_water_collision();
 
 		static void weapons_ammo_special_type();
 		static void weapons_cage_gun();
+		static void weapons_cartoon_gun();
 		static void custom_gun_disable_control_action();
 		static void weapons_delete_gun();
 		static void weapons_force_crosshairs();
@@ -86,5 +100,11 @@ namespace big
 		static void weapons_repair_gun();
 		static void weapons_steal_vehicle_gun();
 		static void weapons_vehicle_gun();
+		static void weapons_pewpew_gun();
+		static void weapons_remote_pewpew();
+
+		static void hotkeys_input();
+		static void hotkeys_teleport_waypoint();
+		static void hotkeys_teleport_objective();
 	};
 }

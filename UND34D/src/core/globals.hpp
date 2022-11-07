@@ -77,6 +77,9 @@ namespace big
 				pair send_to_location{};
 				pair sound_spam{};
 				pair spectate{};
+				pair disownvehicle{};
+				pair destroyvehicle{};
+				pair blockpassive{};
 				pair transaction_error{};
 				pair tse_freeze{};
 				pair tse_sender_mismatch{};
@@ -114,6 +117,10 @@ namespace big
 			int character_slot = 1;
 			int set_level = 130;
 			bool spectating = false;
+			bool freezeplayer = false;
+			bool freezeallplayers = false;
+			bool shakecam = false;
+			bool chase = false;
 		};
 
 		struct protections {
@@ -139,6 +146,9 @@ namespace big
 				bool spectate = true;
 				bool transaction_error = true;
 				bool vehicle_kick = true;
+				bool disownvehicle = true;
+				bool destroyvehicle = true;
+				bool blockpassive = true;
 				bool teleport_to_warehouse = true;
 				bool start_activity = true;
 			};
@@ -147,9 +157,9 @@ namespace big
 		};
 
 		struct self {
-			bool clean_player = false;
 			bool force_wanted_level = false;
 			bool free_cam = false;
+			bool pew_pew_crosshair = false;
 			bool invisibility = false;
 			bool local_visibility = true;
 			bool never_wanted = false;
@@ -157,11 +167,21 @@ namespace big
 			bool noclip = false;
 			bool off_radar = false;
 			bool super_run = false;
+			bool flash_run = false;
+			bool aimbot = false;
+			bool aimbot_exclude_friend = true;
 			bool allow_ragdoll = false;
 			bool no_collision = false;
 			bool unlimited_oxygen = false;
 			bool no_water_collision = false;
 			int wanted_level = 0;
+
+			bool SuperMan = false;
+			bool ragdoll_toggle = false;
+			bool god_mode_toggle = false;
+			bool seatbelt_toggle = false;
+			bool force_field = false;
+
 			bool god_mode = false;
 			bool proof_bullet = false;
 			bool proof_fire = false;
@@ -179,6 +199,10 @@ namespace big
 			int local_weather = 0;
 			bool override_time = {};
 			bool override_weather = false;
+			bool slowmotion = false;
+			bool jumpingcars = false;
+			bool rainbowtraffic = false;
+			float slow_mo = 1.f;
 
 			struct population_control
 			{
@@ -205,6 +229,9 @@ namespace big
 				bool editing_menu_toggle = false;
 				int menu_toggle = VK_INSERT;
 				int teleport_waypoint = 0;
+				bool teleport_waypoint_triggered = false;
+				int teleport_objective = 0;
+				bool teleport_objective_triggered = false;
 			};
 
 			bool dev_dlc = false;
@@ -216,6 +243,8 @@ namespace big
 			bool preview_vehicle = false;
 			bool spawn_inside = false;
 			bool spawn_maxed = false;
+			bool delete_last_spawn = false;
+			int last_spawn = 0;
 			std::string plate = "";
 		};
 
@@ -226,6 +255,8 @@ namespace big
 			bool spawn_clone = false;
 			bool spawn_maxed = false;
 			bool clone_plate = false;
+			bool delete_last_clone = false;
+			int last_clone = 0;
 			std::string plate = "";
 		};
 
@@ -267,15 +298,20 @@ namespace big
 			bool cable_cars = false;
 			bool always_control = false;
 			bool disable_help_text = false;
+			bool clean_player = false;
+			bool mobileradio = false;
+			bool ignoreplayer = false;
+			bool disablehud = false;
 		};
 
 		struct vehicle {
 			struct speedo_meter {
 				float x = .9f;
-				float y = .72f;
+				float y = .52f;
 
 				bool enabled = false;
 				bool left_side = false;
+				bool type_text = false;
 			};
 
 			struct fly
@@ -284,7 +320,7 @@ namespace big
 				bool enabled = false;
 				bool no_collision = false;
 				bool stop_on_exit = false;
-				float speed = 1;
+				float speed = 100;	
 			};
 
 			struct rainbow_paint {
@@ -318,9 +354,13 @@ namespace big
 			bool instant_brake = false;
 			bool is_targetable = true;
 			bool ls_customs = false; // don't save this to disk
+			bool headlightmul = false;
+			float headlightmul_val = 1.f;
+			bool extra_powah = true;
 			bool seatbelt = false;
 			bool turn_signals = false;
 			bool vehicle_jump = false;
+			bool vehicle_uniweap = false;
 			bool keep_vehicle_repaired = false;
 			bool no_water_collision = false;
 			bool remove_speed_limit = false;
@@ -348,9 +388,11 @@ namespace big
 			bool no_spread = false;
 			char vehicle_gun_model[12] = "bus";
 			bool bypass_c4_limit = false;
+			bool remote_pewpew = false;
 		};
 
 		struct window {
+			bool console = true;
 			bool handling = false;
 			bool main = true;
 			bool users = true;
@@ -374,6 +416,7 @@ namespace big
 		struct context_menu
 		{
 			bool enabled = true;
+			bool crosshair = true;
 
 			uint8_t allowed_entity_types =
 				static_cast<uint8_t>(ContextEntityType::PED) |
@@ -433,6 +476,13 @@ namespace big
 			ImU32 friend_color = 4293244509;
 		};
 
+		struct world
+		{
+			int animlist = 0;
+			int scenelist = 0;
+			int visionList = 0;
+		};
+
 		struct spawn_ped
 		{
 			bool preview_ped = false;
@@ -452,6 +502,7 @@ namespace big
 		settings settings{};
 		spawn_vehicle spawn_vehicle{};
 		clone_pv clone_pv{};
+		world world{};
 		spawn_ped spawn_ped{};
 		spoofing spoofing{};
 		vehicle vehicle{};
@@ -568,6 +619,12 @@ namespace big
 				script_handler.tse_sender_mismatch.notify = script_handler_j["tse_sender_mismatch"]["notify"];
 				script_handler.vehicle_kick.log = script_handler_j["vehicle_kick"]["log"];
 				script_handler.vehicle_kick.notify = script_handler_j["vehicle_kick"]["notify"];
+				script_handler.disownvehicle.log = script_handler_j["disownvehicle"]["log"];
+				script_handler.disownvehicle.notify = script_handler_j["disownvehicle"]["notify"];
+				script_handler.destroyvehicle.log = script_handler_j["destroyvehicle"]["log"];
+				script_handler.destroyvehicle.notify = script_handler_j["destroyvehicle"]["notify"];
+				script_handler.blockpassive.log = script_handler_j["blockpassive"]["log"];
+				script_handler.blockpassive.notify = script_handler_j["blockpassive"]["notify"];
 				script_handler.teleport_to_warehouse.log = script_handler_j["teleport_to_warehouse"]["log"];
 				script_handler.teleport_to_warehouse.notify = script_handler_j["teleport_to_warehouse"]["notify"];
 				script_handler.start_activity.log = script_handler_j["start_activity"]["log"];
@@ -605,6 +662,9 @@ namespace big
 				script_handler.spectate = script_handler_j["spectate"];
 				script_handler.transaction_error = script_handler_j["transaction_error"];
 				script_handler.vehicle_kick = script_handler_j["vehicle_kick"];
+				script_handler.disownvehicle = script_handler_j["disownvehicle"];
+				script_handler.destroyvehicle = script_handler_j["destroyvehicle"];
+				script_handler.blockpassive = script_handler_j["blockpassive"];
 				script_handler.teleport_to_warehouse = script_handler_j["teleport_to_warehouse"];
 				script_handler.start_activity = script_handler_j["start_activity"];
 			}
@@ -618,6 +678,10 @@ namespace big
 			this->tunables.cable_cars = j["tunables"]["cable_cars"];
 			this->tunables.always_control = j["tunables"]["always_control"];
 			this->tunables.disable_help_text = j["tunables"]["disable_help_text"];
+			this->tunables.clean_player = j["tunables"]["clean_player"];
+			this->tunables.mobileradio = j["tunables"]["mobileradio"];
+			this->tunables.ignoreplayer = j["tunables"]["ignoreplayer"];
+			this->tunables.disablehud = j["tunables"]["disablehud"];
 
 			this->self.god_mode = j["self"]["god_mode"];
 			this->self.proof_bullet = j["self"]["proof_bullet"];
@@ -629,13 +693,15 @@ namespace big
 			this->self.proof_drown = j["self"]["proof_drown"];
 			this->self.proof_water = j["self"]["proof_water"];
 			this->self.proof_mask = j["self"]["proof_mask"];
-			this->self.clean_player = j["self"]["clean_player"];
 			this->self.invisibility = j["self"]["invisibility"];
 			this->self.local_visibility = j["self"]["local_visibility"];
 			this->self.never_wanted = j["self"]["never_wanted"];
 			this->self.no_ragdoll = j["self"]["no_ragdoll"];
 			this->self.off_radar = j["self"]["off_radar"];
 			this->self.super_run = j["self"]["super_run"];
+			this->self.flash_run = j["self"]["flash_run"];
+			this->self.aimbot = j["self"]["aimbot"];
+			this->self.aimbot_exclude_friend = j["self"]["aimbot_exclude_friend"];
 			this->self.no_collision = j["self"]["no_collision"];
 			this->self.unlimited_oxygen = j["self"]["unlimited_oxygen"];
 			this->self.no_water_collision = j["self"]["no_water_collision"];
@@ -643,16 +709,20 @@ namespace big
 
 			this->settings.dev_dlc = j["settings"]["dev_dlc"];
 			this->settings.hotkeys.menu_toggle = j["settings"]["hotkeys"]["menu_toggle"];
+			this->settings.hotkeys.teleport_waypoint = j["settings"]["hotkeys"]["teleport_waypoint"];
+			this->settings.hotkeys.teleport_objective = j["settings"]["hotkeys"]["teleport_objective"];
 
 			this->spawn_vehicle.preview_vehicle = j["spawn_vehicle"]["preview_vehicle"];
 			this->spawn_vehicle.spawn_inside = j["spawn_vehicle"]["spawn_inside"];
 			this->spawn_vehicle.spawn_maxed = j["spawn_vehicle"]["spawn_maxed"];
 			this->spawn_vehicle.plate = j["spawn_vehicle"]["plate"];
+			this->spawn_vehicle.delete_last_spawn = j["spawn_vehicle"]["delete_last_spawn"];
 
 			this->clone_pv.preview_vehicle = j["clone_pv"]["preview_vehicle"];
 			this->clone_pv.spawn_inside = j["clone_pv"]["spawn_inside"];
 			this->clone_pv.spawn_clone = j["clone_pv"]["spawn_clone"];
 			this->clone_pv.spawn_maxed = j["clone_pv"]["spawn_maxed"];
+			this->clone_pv.delete_last_clone = j["clone_pv"]["delete_last_clone"];
 			this->clone_pv.clone_plate = j["clone_pv"]["clone_plate"];
 			this->clone_pv.plate = j["clone_pv"]["plate"];
 
@@ -697,6 +767,7 @@ namespace big
 			this->vehicle.keep_vehicle_repaired = j["vehicle"]["keep_vehicle_repaired"];
 			this->vehicle.instant_brake = j["vehicle"]["instant_brake"];
 			this->vehicle.is_targetable = j["vehicle"]["is_targetable"];
+			this->vehicle.extra_powah = j["vehicle"]["extra_powah"];
 			this->vehicle.seatbelt = j["vehicle"]["seatbelt"];
 			this->vehicle.turn_signals = j["vehicle"]["turn_signals"];
 			this->vehicle.no_water_collision = j["vehicle"]["no_water_collision"];
@@ -707,8 +778,8 @@ namespace big
 			this->vehicle.speedo_meter.left_side = j["vehicle"]["speedo_meter"]["left_side"];
 			this->vehicle.speedo_meter.x = j["vehicle"]["speedo_meter"]["position_x"];
 			this->vehicle.speedo_meter.y = j["vehicle"]["speedo_meter"]["position_y"];
+			this->vehicle.speedo_meter.type_text = j["vehicle"]["speedo_meter"]["type_text"];
 
-			this->vehicle.rainbow_paint.type = j["vehicle"]["rainbow_paint"]["type"];
 			this->vehicle.rainbow_paint.speed = j["vehicle"]["rainbow_paint"]["speed"];
 			this->vehicle.rainbow_paint.neon = j["vehicle"]["rainbow_paint"]["neon"];
 			this->vehicle.rainbow_paint.primary = j["vehicle"]["rainbow_paint"]["primary"];
@@ -734,6 +805,7 @@ namespace big
 			this->weapons.ammo_special.toggle = j["weapons"]["ammo_special"]["toggle"];
 
 			this->window.color = j["window"]["color"];
+			this->window.console = j["window"]["console"];
 			this->window.gui_scale = j["window"]["gui_scale"];
 			this->window.handling = j["window"]["handling"];
 			this->window.overlay = j["window"]["overlay"];
@@ -856,6 +928,9 @@ namespace big
 								{ "tse_freeze", return_notify_pair(script_handler_notifications.tse_freeze) },
 								{ "tse_sender_mismatch", return_notify_pair(script_handler_notifications.tse_sender_mismatch) },
 								{ "vehicle_kick", return_notify_pair(script_handler_notifications.vehicle_kick) },
+								{ "disownvehicle", return_notify_pair(script_handler_notifications.disownvehicle) },
+								{ "destroyvehicle", return_notify_pair(script_handler_notifications.destroyvehicle) },
+								{ "blockpassive", return_notify_pair(script_handler_notifications.blockpassive) },
 								{ "teleport_to_warehouse", return_notify_pair(script_handler_notifications.teleport_to_warehouse) },
 								{ "start_activity", return_notify_pair(script_handler_notifications.start_activity) }
 							}
@@ -893,6 +968,9 @@ namespace big
 								{ "spectate", script_handler_protections.spectate },
 								{ "transaction_error", script_handler_protections.transaction_error },
 								{ "vehicle_kick", script_handler_protections.vehicle_kick },
+								{ "disownvehicle", script_handler_protections.disownvehicle },
+								{ "destroyvehicle", script_handler_protections.destroyvehicle },
+								{ "blockpassive", script_handler_protections.blockpassive },
 								{ "teleport_to_warehouse", script_handler_protections.teleport_to_warehouse },
 								{ "start_activity", script_handler_protections.start_activity },
 							}
@@ -906,6 +984,10 @@ namespace big
 						{ "no_idle_kick", this->tunables.no_idle_kick },
 						{ "fast_join", this->tunables.fast_join },
 						{ "ambiant_ufos", this->tunables.ambiant_ufos },
+						{ "clean_player", this->tunables.clean_player },
+						{ "ignoreplayer", this->tunables.ignoreplayer},
+						{ "disablehud", this->tunables.disablehud},
+						{ "mobileradio", this->tunables.mobileradio },
 						{ "ambiant_blimp", this->tunables.ambiant_blimp },
 						{ "cable_cars", this->tunables.cable_cars },
 						{ "always_control", this->tunables.always_control },
@@ -924,13 +1006,15 @@ namespace big
 						{ "proof_drown", this->self.proof_drown },
 						{ "proof_water", this->self.proof_water },
 						{ "proof_mask", this->self.proof_mask },
-						{ "clean_player", this->self.clean_player },
 						{ "invisibility", this->self.invisibility },
 						{ "local_visibility", this->self.local_visibility },
 						{ "never_wanted", this->self.never_wanted },
 						{ "no_ragdoll", this->self.no_ragdoll },
 						{ "off_radar", this->self.off_radar },
 						{ "super_run", this->self.super_run },
+						{ "flash_run", this->self.flash_run },
+						{ "aimbot", this->self.aimbot },
+						{ "aimbot_exclude_friend", this->self.aimbot_exclude_friend },
 						{ "no_collision", this->self.no_collision },
 						{ "unlimited_oxygen", this->self.unlimited_oxygen },
 						{ "no_water_collision", this->self.no_water_collision },
@@ -941,7 +1025,9 @@ namespace big
 					"settings", {
 						{ "dev_dlc", this->settings.dev_dlc },
 						{ "hotkeys", {
-								{ "menu_toggle", this->settings.hotkeys.menu_toggle }
+								{ "menu_toggle", this->settings.hotkeys.menu_toggle },
+								{ "teleport_waypoint", this->settings.hotkeys.teleport_waypoint },
+								{ "teleport_objective", this->settings.hotkeys.teleport_objective }
 							}
 						}
 					}
@@ -953,6 +1039,7 @@ namespace big
 						{ "spawn_clone", this->clone_pv.spawn_clone },
 						{ "spawn_maxed", this->clone_pv.spawn_maxed },
 						{ "clone_plate", this->clone_pv.clone_plate },
+						{ "delete_last_clone", this->clone_pv.delete_last_clone },
 						{ "plate", this->clone_pv.plate }
 					}
 				},
@@ -961,6 +1048,7 @@ namespace big
 						{ "preview_vehicle", this->spawn_vehicle.preview_vehicle },
 						{ "spawn_inside", this->spawn_vehicle.spawn_inside },
 						{ "spawn_maxed", this->spawn_vehicle.spawn_maxed},
+						{ "delete_last_spawn", this->spawn_vehicle.delete_last_spawn},
 						{ "plate", this->spawn_vehicle.plate }
 					}
 				},
@@ -1017,6 +1105,7 @@ namespace big
 						{ "keep_vehicle_repaired", this->vehicle.keep_vehicle_repaired },
 						{ "instant_brake", this->vehicle.instant_brake },
 						{ "is_targetable", this->vehicle.is_targetable },
+						{ "extra_powah", this->vehicle.extra_powah },
 						{ "turn_signals", this->vehicle.turn_signals },
 						{ "flares", this->vehicle.flares },
 						{ "chaff", this->vehicle.chaff },
@@ -1029,12 +1118,12 @@ namespace big
 								{ "left_side", this->vehicle.speedo_meter.left_side },
 								{ "position_x", this->vehicle.speedo_meter.x },
 								{ "position_y", this->vehicle.speedo_meter.y },
+								{ "type_text", this->vehicle.speedo_meter.type_text },
 							}
 						},
 						{
 							"rainbow_paint",
 							{
-								{ "type", this->vehicle.rainbow_paint.type },
 								{ "speed", this->vehicle.rainbow_paint.speed },
 								{ "neon", this->vehicle.rainbow_paint.neon },
 								{ "primary", this->vehicle.rainbow_paint.primary },
@@ -1074,6 +1163,7 @@ namespace big
 				{
 					"window", {
 						{ "color", this->window.color },
+						{ "console", this->window.console },
 						{ "gui_scale", this->window.gui_scale },
 						{ "handling", this->window.handling },
 						{ "overlay", this->window.overlay },
@@ -1087,6 +1177,7 @@ namespace big
 				{
 					"context_menu", {
 						{ "enabled", this->context_menu.enabled },
+						{ "crosshair", this->context_menu.crosshair },
 						{ "allowed_entity_types", this->context_menu.allowed_entity_types },
 						{ "selected_option_color", this->context_menu.selected_option_color },
 						{ "bounding_box_enabled", this->context_menu.bounding_box_enabled },

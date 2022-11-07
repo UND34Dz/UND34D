@@ -1,4 +1,4 @@
-#include "fiber_pool.hpp"
+	#include "fiber_pool.hpp"
 #include "util/entity.hpp"
 #include "util/local_player.hpp"
 #include "views/view.hpp"
@@ -56,6 +56,9 @@ namespace big
 
 		ImGui::Checkbox("God Mode", &g->self.god_mode);
 		ImGui::Checkbox("Off Radar", &g->self.off_radar);
+		ImGui::Checkbox("Flash Run", &g->self.super_run);
+		ImGui::Checkbox("Flash Run", &g->self.flash_run);
+		ImGui::Checkbox("Super Man", &g->self.SuperMan);
 		ImGui::Checkbox("Free Cam", &g->self.free_cam);
 		ImGui::Checkbox("Disable Phone", &g->tunables.disable_phone);
 		ImGui::Checkbox("Unlimited Oxygen", &g->self.unlimited_oxygen);
@@ -79,7 +82,7 @@ namespace big
 			ImGui::Checkbox("Locally Visible", &g->self.local_visibility);
 		}
 
-		ImGui::Checkbox("Keep Player Clean", &g->self.clean_player);
+		ImGui::Checkbox("Keep Player Clean", &g->tunables.clean_player);
 
 		ImGui::Checkbox("No Collision", &g->self.no_collision);
 

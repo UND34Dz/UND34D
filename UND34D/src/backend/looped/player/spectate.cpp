@@ -1,7 +1,7 @@
 #include "backend/looped/looped.hpp"
 #include "natives.hpp"
 #include "services/players/player_service.hpp"
-#include "util/globals.hpp"
+#include "util/toxic.hpp"
 
 namespace big
 {
@@ -28,7 +28,7 @@ namespace big
 
 				STREAMING::SET_FOCUS_ENTITY(ped);
 
-				globals::disable_kill_trigger(false);
+				toxic::disable_kill_trigger(false);
 			}
 
 			return;
@@ -36,7 +36,7 @@ namespace big
 
 		const auto target = PLAYER::GET_PLAYER_PED_SCRIPT_INDEX(g_player_service->get_selected()->id());
 
-		globals::disable_kill_trigger(true);
+		toxic::disable_kill_trigger(true);
 
 		NETWORK::NETWORK_SET_IN_SPECTATOR_MODE(true, target);
 		HUD::SET_MINIMAP_IN_SPECTATOR_MODE(true, target);

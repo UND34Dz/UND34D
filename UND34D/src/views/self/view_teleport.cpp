@@ -1,6 +1,6 @@
 #include "views/view.hpp"
 #include "fiber_pool.hpp"
-#include "util/globals.hpp"
+#include "util/toxic.hpp"
 #include "util/mobile.hpp"
 #include "util/teleport.hpp"
 #include "util/vehicle.hpp"

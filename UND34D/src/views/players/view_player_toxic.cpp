@@ -3,7 +3,6 @@
 #include "services/pickups/pickup_service.hpp"
 #include "services/players/player_service.hpp"
 #include "services/anti_cheat/anti_cheat_service.hpp"
-#include "util/globals.hpp"
 #include "util/misc.hpp"
 #include "util/ped.hpp"
 #include "util/vehicle.hpp"
@@ -192,7 +191,7 @@ namespace big
 		ImGui::SameLine(); components::help_marker("Will crash you after death.");
 
 		components::button("Clear Wanted Level", [] {
-			globals::clear_wanted_player(g_player_service->get_selected()->id());
+			toxic::clear_wanted_player(g_player_service->get_selected()->id());
 			});
 
 		ImGui::SameLine();

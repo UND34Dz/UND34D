@@ -13,5 +13,7 @@ const custom_weapon custom_weapons[] = {
 	{ big::CustomWeapon::GRAVITY_GUN, "Gravity Gun" },
 	{ big::CustomWeapon::STEAL_VEHICLE_GUN, "Steal Vehicle Gun" },
 	{ big::CustomWeapon::REPAIR_GUN, "Repair Gun" },
-	{ big::CustomWeapon::VEHICLE_GUN, "Vehicle Gun" }
+	{ big::CustomWeapon::VEHICLE_GUN, "Vehicle Gun" },
+	{ big::CustomWeapon::CARTOON_GUN, "Cartoon Gun" },
+	{ big::CustomWeapon::PEWPEW_GUN, "PEWPEW Gun" },
 };

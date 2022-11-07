@@ -1,4 +1,4 @@
-#include "gui/components/components.hpp"
+	#include "gui/components/components.hpp"
 #include "fiber_pool.hpp"
 
 namespace big
@@ -11,5 +11,14 @@ namespace big
 		if (components::button(text)) {
 			g_fiber_pool->queue_job(cb);
 		}
+	}
+
+	void components::button(const std::string_view text, const std::string_view tooltip, std::function<void()> cb) {
+		if (components::button(text)) {
+			g_fiber_pool->queue_job(cb);
+		}
+
+		if (ImGui::IsItemHovered())
+			ImGui::SetTooltip(tooltip.data());
 	}
 }

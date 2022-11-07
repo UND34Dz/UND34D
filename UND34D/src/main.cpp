@@ -49,6 +49,7 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 			if(cant_find_window)
 				std::this_thread::sleep_for(20s);
 
+			g_hwnd = FindWindow(L"grcWindow", L"Grand Theft Auto V");
 			std::filesystem::path base_dir = std::getenv("appdata");
 			base_dir /= "UND34D";
 			auto file_manager_instance = std::make_unique<file_manager>(base_dir);
@@ -57,10 +58,11 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 				file_manager_instance->get_project_file("./settings.json")
 			);
 
+			g->load();
 			auto logger_instance = std::make_unique<logger>(
 				"UND34D",
 				file_manager_instance->get_project_file("./cout.log")
-			);
+				);
 
 			EnableMenuItem(GetSystemMenu(GetConsoleWindow(), 0), SC_CLOSE, MF_BYCOMMAND | MF_DISABLED | MF_GRAYED);
 
@@ -68,7 +70,6 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 			{
 				LOG(INFO) << "UND34D Initializing";
 
-				g->load();
 				LOG(INFO) << "Settings Loaded.";
 
 				auto pointers_instance = std::make_unique<pointers>();
@@ -121,6 +122,8 @@ BOOL APIENTRY DllMain(HMODULE hmod, DWORD reason, PVOID)
 				g_script_mgr.add_script(std::make_unique<script>(&backend::rainbowpaint_loop, "Rainbow Paint"));
 				g_script_mgr.add_script(std::make_unique<script>(&backend::vehiclefly_loop, "Vehicle Fly"));
 				g_script_mgr.add_script(std::make_unique<script>(&backend::turnsignal_loop, "Turn Signals"));
+				g_script_mgr.add_script(std::make_unique<script>(&backend::hotkeys_input, "Hotkeys Input"));
+				g_script_mgr.add_script(std::make_unique<script>(&backend::hotkeys_loop, "Hotkeys Loop"));
 				g_script_mgr.add_script(std::make_unique<script>(&backend::disable_control_action_loop, "Disable Controls"));
 				g_script_mgr.add_script(std::make_unique<script>(&context_menu_service::context_menu, "Context Menu"));
 				g_script_mgr.add_script(std::make_unique<script>(&chat_service::chat_menu, "Chat Menu"));

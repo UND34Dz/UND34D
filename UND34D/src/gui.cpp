@@ -147,10 +147,6 @@ namespace big
 		}
 		EXCEPT_CLAUSE
 	}
-	
-	
-
-
 	Vector2 get_texture_scale(float size)
 	{
 		int x, y;

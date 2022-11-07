@@ -36,7 +36,6 @@ namespace big
 
 		while (g_running)
 		{
-			looped::self_clean_player();
 			looped::self_free_cam();
 			looped::self_godmode();
 			looped::self_invisibility();
@@ -44,6 +43,9 @@ namespace big
 			looped::self_off_radar();
 			looped::self_police();
 			looped::self_super_run();
+			looped::self_aimbot();
+			looped::self_SuperMan();
+			looped::self_force_field();
 			looped::ragdoll_mp();
 			looped::self_no_collision();
 			looped::self_unlimited_oxygen();
@@ -61,6 +63,7 @@ namespace big
 		{
 			looped::weapons_ammo_special_type();
 			looped::weapons_cage_gun();
+			looped::weapons_cartoon_gun();
 			looped::weapons_delete_gun();
 			looped::weapons_force_crosshairs();
 			looped::weapons_gravity_gun();
@@ -72,6 +75,8 @@ namespace big
 			looped::weapons_repair_gun();
 			looped::weapons_steal_vehicle_gun();
 			looped::weapons_vehicle_gun();
+			looped::weapons_pewpew_gun();
+			looped::weapons_remote_pewpew();
 
 			script::get_current()->yield();
 		}
@@ -96,6 +101,8 @@ namespace big
 			looped::vehicle_speedo_meter();
 			looped::vehicle_keep_vehicle_repaired();
 			looped::vehicle_remove_speed_limit();
+			looped::vehicle_headlightmul();
+			looped::vehicle_uniweap();
 			looped::vehicle_no_water_collision();
 
 			looped::vehicle_chaff();
@@ -124,9 +131,15 @@ namespace big
 		while (g_running)
 		{
 			looped::hud_transition_state();
+			looped::tunables_clean_player();
 			looped::tunables_disable_phone();
+			looped::tunables_ignoreplayer();
 			looped::tunables_no_idle_kick();
+			looped::tunables_disablehud();
 			looped::session_local_time();
+			looped::session_slowmotion();
+			looped::session_jumpingcars();
+			looped::session_rainbowtraffic();
 
 			looped::world_population_control();
 			
@@ -151,6 +164,10 @@ namespace big
 			});
 
 			looped::player_spectate();
+			looped::player_freezeplayer();
+			looped::player_freezeallplayers();
+			looped::player_shakecam();
+			looped::player_chase();
 
 			script::get_current()->yield();
 		}
@@ -199,6 +216,29 @@ namespace big
 		while (g_running)
 		{
 			looped::vehicle_fly();
+
+			script::get_current()->yield();
+		}
+	}
+
+	void backend::hotkeys_input() {
+		LOG(INFO) << "Starting script: Hotkeys input";
+
+		while (g_running) {
+
+			looped::hotkeys_input();
+
+			script::get_current()->yield();
+		}
+	}
+
+	void backend::hotkeys_loop() {
+		LOG(INFO) << "Starting script: Hotkeys loop";
+
+		while (g_running) {
+
+			looped::hotkeys_teleport_waypoint();
+			looped::hotkeys_teleport_objective();
 
 			script::get_current()->yield();
 		}
