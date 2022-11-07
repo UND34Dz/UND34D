@@ -8,7 +8,7 @@
 #include <backends/imgui_impl_dx11.h>
 #include <backends/imgui_impl_win32.h>
 #include <imgui_internal.h>
-
+#include "fonts/nasalizationcpp.hpp"
 IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 namespace big
@@ -44,64 +44,17 @@ namespace big
 		ImGui_ImplDX11_Init(m_d3d_device.Get(), m_d3d_device_context.Get());
 		ImGui_ImplWin32_Init(g_pointers->m_hwnd);
 
-		file font_file_path("C:/Windows/Fonts/msyh.ttc");
-		if (!font_file_path.exists())
-			font_file_path = { "C:/Windows/Fonts/msyh.ttf" };
-		auto font_file = std::ifstream(font_file_path.get_path(), std::ios::binary | std::ios::ate);
-		const auto font_data_size = static_cast<int>(font_file.tellg());
-		const auto font_data = std::make_unique<std::uint8_t[]>(font_data_size);
-		
-		font_file.seekg(0);
-		font_file.read(reinterpret_cast<char*>(font_data.get()), font_data_size);
-		font_file.close();
+
 
 		{
-			ImFontConfig fnt_cfg{};
-			fnt_cfg.FontDataOwnedByAtlas = false;
-			strcpy(fnt_cfg.Name, "Fnt20px");
+			ImFontConfig font_icons_cfg{};
+			font_icons_cfg.FontDataOwnedByAtlas = false;
+			std::strcpy(font_icons_cfg.Name, "Icons");
+			g->window.tab_font = io.Fonts->AddFontFromMemoryCompressedTTF((void*)nasalization_compressed_data, nasalization_compressed_size, 19.0f, NULL, ImGui::GetIO().Fonts->GetGlyphRangesJapanese());
 
-			io.Fonts->AddFontFromMemoryTTF(const_cast<std::uint8_t*>(font_storopia), sizeof(font_storopia), 20.f, &fnt_cfg, io.Fonts->GetGlyphRangesDefault());
-			fnt_cfg.MergeMode = true;
-			io.Fonts->AddFontFromMemoryTTF(font_data.get(), font_data_size, 20.f, &fnt_cfg, io.Fonts->GetGlyphRangesChineseSimplifiedCommon());
-			io.Fonts->AddFontFromMemoryCompressedBase85TTF(font_agave, 20.f, &fnt_cfg, io.Fonts->GetGlyphRangesCyrillic());
-			io.Fonts->Build();
+			
 		}
 
-		{
-			ImFontConfig fnt_cfg{};
-			fnt_cfg.FontDataOwnedByAtlas = false;
-			strcpy(fnt_cfg.Name, "Fnt28px");
-
-			g->window.font_title = io.Fonts->AddFontFromMemoryTTF(const_cast<std::uint8_t*>(font_storopia), sizeof(font_storopia), 28.f, &fnt_cfg);
-			fnt_cfg.MergeMode = true;
-			io.Fonts->AddFontFromMemoryTTF(font_data.get(), font_data_size, 28.f, &fnt_cfg, io.Fonts->GetGlyphRangesChineseSimplifiedCommon());
-			io.Fonts->AddFontFromMemoryCompressedBase85TTF(font_agave, 28.f, &fnt_cfg, io.Fonts->GetGlyphRangesCyrillic());
-			io.Fonts->Build();
-		}
-
-		{
-			ImFontConfig fnt_cfg{};
-			fnt_cfg.FontDataOwnedByAtlas = false;
-			strcpy(fnt_cfg.Name, "Fnt24px");
-
-			g->window.font_sub_title = io.Fonts->AddFontFromMemoryTTF(const_cast<std::uint8_t*>(font_storopia), sizeof(font_storopia), 24.f, &fnt_cfg);
-			fnt_cfg.MergeMode = true;
-			io.Fonts->AddFontFromMemoryTTF(font_data.get(), font_data_size, 24.f, &fnt_cfg, ImGui::GetIO().Fonts->GetGlyphRangesChineseSimplifiedCommon());
-			io.Fonts->AddFontFromMemoryCompressedBase85TTF(font_agave, 24.f, &fnt_cfg, io.Fonts->GetGlyphRangesCyrillic());
-			io.Fonts->Build();
-		}
-
-		{
-			ImFontConfig fnt_cfg{};
-			fnt_cfg.FontDataOwnedByAtlas = false;
-			strcpy(fnt_cfg.Name, "Fnt18px");
-
-			g->window.font_small = io.Fonts->AddFontFromMemoryTTF(const_cast<std::uint8_t*>(font_storopia), sizeof(font_storopia), 18.f, &fnt_cfg);
-			fnt_cfg.MergeMode = true;
-			io.Fonts->AddFontFromMemoryTTF(font_data.get(), font_data_size, 18.f, &fnt_cfg, io.Fonts->GetGlyphRangesChineseSimplifiedCommon());
-			io.Fonts->AddFontFromMemoryCompressedBase85TTF(font_agave, 18.f, &fnt_cfg, io.Fonts->GetGlyphRangesCyrillic());
-			io.Fonts->Build();
-		}
 		
 		{
 			ImFontConfig font_icons_cfg{};

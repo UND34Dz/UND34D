@@ -31,5 +31,8 @@ namespace big
 		static bool selectable(const std::string_view, bool, ImGuiSelectableFlags);
 		static void selectable(const std::string_view, bool, std::function<void()>);
 		static void selectable(const std::string_view, bool, ImGuiSelectableFlags, std::function<void()>);
+
+		static float resize_float(float val);
+		static ImVec2 resize_imvector(ImVec2 vector);
 	};
 }

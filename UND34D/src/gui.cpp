@@ -23,86 +23,41 @@ namespace big
 		static ImVec4 whiteBroken = ImVec4(0.792f, 0.784f, 0.827f, 1.f);
 
 		auto& style = ImGui::GetStyle();
-		style.WindowPadding = { 10.f, 10.f };
-		style.PopupRounding = 3.f;
-		style.FramePadding = { 8.f, 4.f };
-		style.ItemSpacing = { 10.f, 8.f };
-		style.ItemInnerSpacing = { 6.f, 6.f };
-		style.TouchExtraPadding = { 0.f, 0.f };
-		style.IndentSpacing = 21.f;
-		style.ScrollbarSize = 15.f;
-		style.GrabMinSize = 8.f;
-		style.WindowBorderSize = 0.f;
-		style.ChildBorderSize = 0.f;
-		style.PopupBorderSize = 0.f;
-		style.FrameBorderSize = 0.f;
-		style.TabBorderSize = 0.f;
-		style.WindowRounding = 5.f;
-		style.ChildRounding = 2.f;
-		style.FrameRounding = 3.f;
-		style.ScrollbarRounding = 3.f;
-		style.GrabRounding = 0.f;
-		style.TabRounding = 3.f;
 		style.WindowTitleAlign = { 0.5f, 0.5f };
-		style.ButtonTextAlign = { 0.5f, 0.5f };
-		style.DisplaySafeAreaPadding = { 3.f, 3.f };
+		style.SelectableTextAlign = { 0.5f, 0.5f };
+		style.WindowRounding = 0.f;
+		style.WindowBorderSize = 1.f;
+		style.ChildRounding = 1.f;
+		style.PopupRounding = 0.f;
+		style.AntiAliasedLines = true;
+		style.AntiAliasedFill = true;
+		style.CurveTessellationTol = 0.f;
+
 
 		auto& colors = style.Colors;
-		colors[ImGuiCol_Text] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
-		colors[ImGuiCol_TextDisabled] = ImVec4(1.00f, 0.90f, 0.19f, 1.00f);
-		colors[ImGuiCol_WindowBg] = bgColor;
-		colors[ImGuiCol_ChildBg] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
-		colors[ImGuiCol_PopupBg] = ImVec4(0.08f, 0.08f, 0.08f, 0.94f);
-		colors[ImGuiCol_Border] = ImVec4(0.30f, 0.30f, 0.30f, 0.50f);
-		colors[ImGuiCol_BorderShadow] = ImVec4(0.00f, 0.00f, 0.00f, 0.00f);
-		colors[ImGuiCol_FrameBg] = ImVec4(0.21f, 0.21f, 0.21f, 0.54f);
-		colors[ImGuiCol_FrameBgHovered] = ImVec4(0.21f, 0.21f, 0.21f, 0.78f);
-		colors[ImGuiCol_FrameBgActive] = ImVec4(0.28f, 0.27f, 0.27f, 0.54f);
-		colors[ImGuiCol_TitleBg] = ImVec4(0.17f, 0.17f, 0.17f, 1.00f);
-		colors[ImGuiCol_TitleBgActive] = ImVec4(0.19f, 0.19f, 0.19f, 1.00f);
-		colors[ImGuiCol_TitleBgCollapsed] = ImVec4(0.00f, 0.00f, 0.00f, 0.51f);
-		colors[ImGuiCol_MenuBarBg] = ImVec4(0.14f, 0.14f, 0.14f, 1.00f);
-		colors[ImGuiCol_ScrollbarBg] = colors[ImGuiCol_WindowBg];
-		colors[ImGuiCol_ScrollbarGrab] = primary;
-		colors[ImGuiCol_ScrollbarGrabHovered] = secondary;
-		colors[ImGuiCol_ScrollbarGrabActive] = primary;
-		colors[ImGuiCol_CheckMark] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
-		colors[ImGuiCol_SliderGrab] = ImVec4(0.34f, 0.34f, 0.34f, 1.00f);
-		colors[ImGuiCol_SliderGrabActive] = ImVec4(0.39f, 0.38f, 0.38f, 1.00f);
-		colors[ImGuiCol_Button] = primary;
-		colors[ImGuiCol_ButtonHovered] = secondary;
-		colors[ImGuiCol_ButtonActive] = colors[ImGuiCol_ButtonHovered];
-		colors[ImGuiCol_Header] = ImVec4(0.37f, 0.37f, 0.37f, 0.31f);
-		colors[ImGuiCol_HeaderHovered] = ImVec4(0.38f, 0.38f, 0.38f, 0.37f);
-		colors[ImGuiCol_HeaderActive] = ImVec4(0.37f, 0.37f, 0.37f, 0.51f);
-		colors[ImGuiCol_Separator] = ImVec4(0.38f, 0.38f, 0.38f, 0.50f);
-		colors[ImGuiCol_SeparatorHovered] = ImVec4(0.46f, 0.46f, 0.46f, 0.50f);
-		colors[ImGuiCol_SeparatorActive] = ImVec4(0.46f, 0.46f, 0.46f, 0.64f);
-		colors[ImGuiCol_ResizeGrip] = whiteBroken;
-		colors[ImGuiCol_ResizeGripHovered] = ImVec4(1.f, 1.f, 1.f, 1.00f);
-		colors[ImGuiCol_ResizeGripActive] = whiteBroken;
-		colors[ImGuiCol_Tab] = ImVec4(0.21f, 0.21f, 0.21f, 0.86f);
-		colors[ImGuiCol_TabHovered] = ImVec4(0.27f, 0.27f, 0.27f, 0.86f);
-		colors[ImGuiCol_TabActive] = ImVec4(0.34f, 0.34f, 0.34f, 0.86f);
-		colors[ImGuiCol_TabUnfocused] = ImVec4(0.10f, 0.10f, 0.10f, 0.97f);
-		colors[ImGuiCol_TabUnfocusedActive] = ImVec4(0.15f, 0.15f, 0.15f, 1.00f);
-		colors[ImGuiCol_PlotLines] = ImVec4(0.61f, 0.61f, 0.61f, 1.00f);
-		colors[ImGuiCol_PlotLinesHovered] = ImVec4(1.00f, 0.43f, 0.35f, 1.00f);
-		colors[ImGuiCol_PlotHistogram] = ImVec4(0.90f, 0.70f, 0.00f, 1.00f);
-		colors[ImGuiCol_PlotHistogramHovered] = ImVec4(1.00f, 0.60f, 0.00f, 1.00f);
-		colors[ImGuiCol_TextSelectedBg] = ImVec4(0.26f, 0.59f, 0.98f, 0.35f);
-		colors[ImGuiCol_DragDropTarget] = ImVec4(1.00f, 1.00f, 0.00f, 0.90f);
-		colors[ImGuiCol_NavHighlight] = ImVec4(0.26f, 0.59f, 0.98f, 1.00f);
-		colors[ImGuiCol_NavWindowingHighlight] = ImVec4(1.00f, 1.00f, 1.00f, 0.70f);
-		colors[ImGuiCol_NavWindowingDimBg] = ImVec4(0.80f, 0.80f, 0.80f, 0.20f);
-		colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.80f, 0.80f, 0.80f, 0.35f);
+		colors[ImGuiCol_Border] = ImGui::ColorConvertU32ToFloat4(ImColor(89, 66, 250, 204));
+		colors[ImGuiCol_CheckMark] = ImGui::ColorConvertU32ToFloat4(ImColor(89, 34, 255, 255));
+		colors[ImGuiCol_SliderGrab] = ImGui::ColorConvertU32ToFloat4(ImColor(89, 34, 255, 255));
+		colors[ImGuiCol_Button] = ImGui::ColorConvertU32ToFloat4(ImColor(89, 34, 255, 255));
+		colors[ImGuiCol_ChildBg] = ImColor(0, 0, 0, 255);
+
+		
 	}
 
 	void gui::dx_on_tick()
 	{
-		ImGui::PushStyleColor(ImGuiCol_WindowBg, ImGui::ColorConvertU32ToFloat4(g->window.color));
-		view::root();
-		ImGui::PopStyleColor();
+		static bool once_pos = true;
+		if (once_pos)
+		{
+			ImGui::SetNextWindowPos(ImVec2(components::resize_float(217), 50));
+			once_pos = false;
+		}
+		ImGui::SetNextWindowSize(components::resize_imvector(ImVec2(660.f, 600.f)));
+		if (ImGui::Begin("UND34D", NULL, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar))
+		{
+			ImGui::SetScrollX(0.f);
+			view::root();
+		}
 	}
 
 	void gui::always_draw()
@@ -155,35 +110,30 @@ namespace big
 	}
 	void gui::script_func()
 	{
-		std::string path = std::getenv("appdata");
+		/*std::string path = std::getenv("appdata");
 
 		path += g_gui.texture;
 		g_fiber_pool->queue_job([] {notify::above_map(std::format("Loaded UND34D.      "
 			"Press {} to open", ImGui::key_names[g->settings.hotkeys.menu_toggle])); });
 		ytd_file.load_ytd(path.c_str(), "tupoye.ytd");
 		float size_txt = 0.15f;
-		auto size_spinner = get_texture_scale(size_txt);
+		auto size_spinner = get_texture_scale(size_txt);*/
 		while (true)
 		{
 
 			g_gui.script_on_tick();
 			//if (g_gui.m_start_topoye)
 			 //amount of seconds
-			g_native_gui.draw_texture(
-				"tupoye",
-				"tupoye_m",
-				0.065f,
-				0.65f, // good
-				size_spinner.x,
-				size_spinner.y,
-				0.0f,
-				255, 255, 255, 255);
+			//g_native_gui.draw_texture(
+			//	"tupoye",
+			//	"tupoye_m",
+			//	0.065f,
+			//	0.65f, // good
+			//	size_spinner.x,
+			//	size_spinner.y,
+			//	0.0f,
+			//	255, 255, 255, 255);
 				script::get_current()->yield();
-		}
-			
-			//g_gui.m_start_topoye = false;
-
-
-		//Sleep(1000);
+		}			
 	}
 }

@@ -404,7 +404,8 @@ namespace big
 
 			ImU32 color = 3357612055;
 			float gui_scale = 1.f;
-
+			bool auto_resize = { false };
+			ImFont* tab_font = nullptr;
 			ImFont* font_title = nullptr;
 			ImFont* font_sub_title = nullptr;
 			ImFont* font_small = nullptr;
