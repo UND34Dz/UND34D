@@ -1,24 +1,24 @@
 [submodule "vendor/json"]
 	path = vendor/json
-	url = https://github.com/UND34Dz/json
+	url = https://github.com/UND34Dz/json.git
 	ignore = dirty
 [submodule "vendor/MinHook"]
 	path = vendor/MinHook
-	url = https://github.com/UND34Dz/minhook
+	url = https://github.com/UND34Dz/minhook.git
 	ignore = dirty
 [submodule "vendor/g3log"]
 	path = vendor/g3log
-	url = https://github.com/UND34Dz/g3log.git
+	url = https://github.com/UND34Dz/g3log
 	ignore = dirty
 [submodule "vendor/GTAV-Classes"]
 	path = vendor/GTAV-Classes
-	url = https://github.com/UND34Dz/GTAV-Classes.git
+	url = https://github.com/UND34Dz/GTAV-Classes
 	ignore = dirty
 [submodule "vendor/ImGui"]
 	path = vendor/ImGui
-	url = https://github.com/UND34Dz/imgui.git
+	url = https://github.com/UND34Dz/imgui
 	ignore = dirty
 [submodule "vendor/pugixml"]
 	path = vendor/pugixml
-	url = https://github.com/UND34Dz/pugixml.git
+	url = https://github.com/UND34Dz/pugixml.
 	ignore = dirty
